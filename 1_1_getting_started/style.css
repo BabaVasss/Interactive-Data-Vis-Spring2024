@@ -10,11 +10,16 @@ h1 {
 }
 
 h3 {
+  color: darkcyan;
   font-size: 2em;
   margin: 0.25em 0;
 }
 
 p {
   font-size: 1em;
-  color: pink;
+  color: purple;
+}
+
+body {
+  background-color: bisque;
 }
