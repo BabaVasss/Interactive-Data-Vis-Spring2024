@@ -1,28 +1,32 @@
 
 /* CONSTANTS AND GLOBALS */
-const width = window.innerWidth *.8;
-const height = 400;
-const margin = 40;
+const width = window.innerWidth *0.8;
+//const height = 400;
+const height = window.innerHeight * 0.7
+//const margin = 40;
 
-/* LOAD DATA */
-d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
-  .then(data => {
-    console.log("data", data)
+data = d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then((data) => {
+    console.log("data",data)
+    console.log(data)
 
     /* SCALES */
-    /** This is where you should define your scales from data to pixel space */
+    console.log(d3)
     //first add svg to container
-    const svg = d3.select("#container")
+    const svg = d3
+      .select("#container")
       .append("svg")
       .attr("width", width)
       .attr("height", height)
+      .style("overflow", "visible");
 
     //add xscale for the bargraph
     const xScale = d3.scaleBand()
       .domain(data.map(d => d.activity))
       .range([margin, width - margin])
-      .paddingInner(0.1)
-      .paddingOuter(0.2)
+      //.paddingInner(0.1)
+      .marginInner(0.1)
+      //.paddingOuter(0.2)
+      .marginOuter(0.2)
 
     //add yscale for the bargraph
     const yScale = d3.scaleLinear()
@@ -53,4 +57,4 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
       .attr("y", d => yScale(d.count))
       .attr("width", xScale.bandwidth)
       .attr("height", d => height - yScale(d.count) - margin)
-  })
+  });
