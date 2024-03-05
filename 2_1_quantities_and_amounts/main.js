@@ -27,6 +27,15 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
       .paddingOuter(0.2)
       //.marginOuter(0.2)
 
+
+
+      //Below are some of my attempts to create a horizontal graph
+    //const xScale = d3.scaleLinear()
+      //.domain([data.map(d => d.Nationality)])
+      //.range([margin.left, width - margin.right])
+
+
+
     //add yscale for the bargraph // the error is in the yScale
     const yScale = d3.scaleLinear()
       .domain([239,5181])
@@ -34,13 +43,25 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
       //.domain([0,1])
       //.domain([ydomainMin, ydomainMax])
       .range([height - margin, margin])
+      
+      
 
-    //add group to X axis; this places the magin in a location
+
+
+      //Below are some of my attemps to create a horizontal graph
+    //const yScale = d3.scaleBand()
+      //.domain([239, 5181])
+      //.range([margin.top, height - margin.bottom])
+      //.padding(0.1)
+
+
+
+    //add category or group to X axis; this places the magin in a location
     const xAxis = d3.axisBottom(xScale)
     svg.append("g")
       .attr("transform", `translate(0, ${height - margin})`)
       .call(xAxis)
-    //add group to Y axis; this places the margin in a location
+    //add category or group to Y axis; this places the margin in a location
     const yAxis = d3.axisLeft(yScale)
     svg.append("g")
       .attr("transform", `translate(${margin}, 0)`)
