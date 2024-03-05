@@ -1,16 +1,15 @@
 
 /* CONSTANTS AND GLOBALS */
-const width = window.innerWidth *0.8;
-//const height = 400;
-const height = window.innerHeight * 0.7
-//const margin = 40;
+const width = window.innerWidth *.8 ;
+const height = 400;
+const margin = 20;
 
-data = d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then((data) => {
+d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
     console.log("data",data)
-    console.log(data)
+
 
     /* SCALES */
-    console.log(d3)
+   
     //first add svg to container
     const svg = d3
       .select("#container")
@@ -21,27 +20,30 @@ data = d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then((data) =
 
     //add xscale for the bargraph
     const xScale = d3.scaleBand()
-      .domain(data.map(d => d.activity))
+      .domain(data.map(d => d.Nationality))
       .range([margin, width - margin])
-      //.paddingInner(0.1)
-      .marginInner(0.1)
-      //.paddingOuter(0.2)
-      .marginOuter(0.2)
+      .paddingInner(0.1)
+      //.marginInner(0.1)
+      .paddingOuter(0.2)
+      //.marginOuter(0.2)
 
-    //add yscale for the bargraph
+    //add yscale for the bargraph // the error is in the yScale
     const yScale = d3.scaleLinear()
-      .doman([0, Math.max(...data.map(d => d.count))])
+      .domain([239,5181])
+      //.doman([0, Math.max(...data.map(d => d.Count))])
+      //.domain([0,1])
+      //.domain([ydomainMin, ydomainMax])
       .range([height - margin, margin])
 
-    //add group to X axis
+    //add group to X axis; this places the magin in a location
     const xAxis = d3.axisBottom(xScale)
     svg.append("g")
-      .attr("transform", `translate(0, $(height - margin))`)
+      .attr("transform", `translate(0, ${height - margin})`)
       .call(xAxis)
-    //add group to Y axis
+    //add group to Y axis; this places the margin in a location
     const yAxis = d3.axisLeft(yScale)
     svg.append("g")
-      .attr("transform", `translate($(margin), 0)`)
+      .attr("transform", `translate(${margin}, 0)`)
       .call(yAxis)
 
 
@@ -53,8 +55,8 @@ data = d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then((data) =
       .data(data)
       .join("rect")
       .attr("class", "bar")
-      .attr("x", d => xScale(d.activity))
-      .attr("y", d => yScale(d.count))
+      .attr("x", d => xScale(d.Nationality))
+      .attr("y", d => yScale(d.Count))
       .attr("width", xScale.bandwidth)
-      .attr("height", d => height - yScale(d.count) - margin)
+      .attr("height", d => height - yScale(d.Count) - margin)
   });
