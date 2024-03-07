@@ -5,23 +5,27 @@ const width = window.innerWidth * 0.7,
   radius = 5;
 
 /* LOAD DATA */
-d3.json("../data/environmentRatings.json", d3.autoType).then(data => {
-  console.log(data)
+d3.csv("../data/MoMA_distributions.csv", d3.autoType)
+  .then(data => {
+    console.log(data)
+
 
   /* SCALES */
-  // xscale  - linear,count
+  // xscale  - linear,count change variable to width
   const xScale = d3.scaleLinear()
-    .domain([0, d3.max(data.map(d => d.envScore2020))])
+    .domain([0, d3.max(data.map(d => d.width))])
     .range([margin.left, width - margin.right])
 
-    // yscale - linear,count
+    // yscale - linear,count change variable to length
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.ideologyScore2020)])
+    .domain([0, d3.max(data, d => d.length)])
     .range([height - margin.bottom, margin.top])
 
-  const colorScale = d3.scaleOrdinal()
-    .domain(["R", "D"])
-    .range(["red", "blue", "purple"])
+  //Create new scale to reflect artist's lifespan
+  const sizeScale = d3.scaleLinear()
+    .domain("Artist Lifespan")
+    .range(["blue"])
+    //.range(["red", "blue", "purple"])
 
   /* HTML ELEMENTS */
   // svg
@@ -44,11 +48,11 @@ d3.json("../data/environmentRatings.json", d3.autoType).then(data => {
   // circles
   const dot = svg
     .selectAll("circle")
-    .data(data, d => d.BioID) // second argument is the unique key for that row
+    .data(data, d => d.ArtistBio) // second argument is the unique key for that row
     .join("circle")
-    .attr("cx", d => xScale(d.envScore2020))
-    .attr("cy", d => yScale(d.ideologyScore2020))
+    .attr("cx", d => xScale(d.width))
+    .attr("cy", d => yScale(d.length))
     .attr("r", radius)
-    .attr("fill", d => colorScale(d.Party))
+    .attr("fill", d => sizeScale(d.Artist))
 
 });

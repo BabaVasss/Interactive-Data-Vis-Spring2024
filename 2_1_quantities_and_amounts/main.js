@@ -57,12 +57,6 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
 
 
 
-      //Below are some of my attemps to create a horizontal graph
-    //const yScale = d3.scaleBand()
-      //.domain([239, 5181])
-      //.range([margin.top, height - margin.bottom])
-      //.padding(0.1)
-
 
 
     //add category or group to X axis; this places the magin in a location
