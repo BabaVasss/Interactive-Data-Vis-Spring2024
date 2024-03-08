@@ -13,12 +13,12 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
   /* SCALES */
   // xscale  - linear,count change variable to width
   const xScale = d3.scaleLinear()
-    .domain([0, d3.max(data.map(d => d.width))])
+    .domain([0, d3.max(data.map(d => d.width ))])
     .range([margin.left, width - margin.right])
 
     // yscale - linear,count change variable to length
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.length)])
+    .domain([0, d3.max(data, d => d.length )])
     .range([height - margin.bottom, margin.top])
 
   //Create new scale to reflect artist's lifespan
