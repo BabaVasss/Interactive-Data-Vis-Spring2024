@@ -22,10 +22,11 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .range([height - margin.bottom, margin.top])
 
   //Create new scale to reflect artist's lifespan
-  const sizeScale = d3.scaleLinear()
-    .domain("Artist Lifespan")
-    .range(["blue"])
-    //.range(["red", "blue", "purple"])
+  const sizeScale = d3.scaleOrdinal()
+    .domain(["Artist Lifespan"])
+    //.domain("Artist Lifespan")
+    //range([0, d3.max(data, d => d.Artist Lifespan)])
+    .range(["size"])
 
   /* HTML ELEMENTS */
   // svg
@@ -33,6 +34,8 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;")
 
   // axis scales
   const xAxis = d3.axisBottom(xScale)
@@ -46,13 +49,26 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .call(yAxis);
 
   // circles
-  const dot = svg
+svg.append("g")
     .selectAll("circle")
-    .data(data, d => d.ArtistBio) // second argument is the unique key for that row
+    .data(data) // second argument is the unique key for that row
     .join("circle")
     .attr("cx", d => xScale(d.width))
     .attr("cy", d => yScale(d.length))
     .attr("r", radius)
-    .attr("fill", d => sizeScale(d.Artist))
+    .attr("fill", d => sizeScale(d.ArtistLifespan))
+    //.call(sel => sel.transition()
+      //.delay(500)
+      //.duration(1500)
+      //.attr("cx", d => xScale(d.width))
+      //.attr("cy", d => yScale(d.length)))
 
+   // svg.selectAll(".bar")
+   // .data(data)
+   // .join("rect")
+   // .attr("class", "bar")
+   // .attr("x", 0 + margin)
+   // .attr("y", d => yScale(d.Nationality))
+   // .attr("width", d => xScale(d.Count))
+   // .attr("height", yScale.bandwidth())
 });
