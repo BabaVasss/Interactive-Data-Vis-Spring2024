@@ -42,7 +42,7 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .attr("text-anchor", "middle")
     .text("Width (cm)")
     .style("font-size", "20px")
-    .style("fill", "black");
+    .style("fill", "purple");
   
   svg.append("text")
     .attr("class", "ylabel")
@@ -52,7 +52,7 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .attr("text-anchor", "middle")
     .text("Length (cm)")
     .style("font-size", "20px")
-    .style("fill", "black");
+    .style("fill", "purple");
     
     
   // axis scales
