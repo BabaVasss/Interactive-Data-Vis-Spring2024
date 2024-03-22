@@ -2,7 +2,7 @@
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 60, left: 60, right: 40 },
-  radius = 5;
+  radius = 2;
 
 /* LOAD DATA */
 d3.csv("../data/MoMA_distributions.csv", d3.autoType)
@@ -13,30 +13,48 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
   /* SCALES */
   // xscale  - linear,count change variable to width
   const xScale = d3.scaleLinear()
-    .domain([0, d3.max(data.map(d => d.width ))])
+    //.domain([0, d3.max(data.map(d => d["Width (cm)"]))]) 
+    .domain([0,100]) // based on human lifespan
     .range([margin.left, width - margin.right])
 
     // yscale - linear,count change variable to length
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.length )])
+    .domain([0, d3.max(data.map(d => d["Length (cm)"]))]) 
+   //.domain([0,100]) // based on human lifespan
     .range([height - margin.bottom, margin.top])
 
-  //Create new scale to reflect artist's lifespan
-  const sizeScale = d3.scaleOrdinal()
-    .domain(["Artist Lifespan"])
-    //.domain("Artist Lifespan")
-    //range([0, d3.max(data, d => d.Artist Lifespan)])
-    .range(["size"])
+  //Create new scale to reflect artist's lifespan by size
+ const sizeScale = d3.scaleLinear()
+   .domain([0, d3.max(data, d => d["Artist Lifespan"])])
+   .range([0, 100])
 
   /* HTML ELEMENTS */
   // svg
   const svg = d3.select("#container")
-    .append("svg")
+    .append('svg')
     .attr("width", width)
     .attr("height", height)
-    .attr("viewBox", [0, 0, width, height])
-    .attr("style", "max-width: 100%; height: auto;")
-
+    
+  svg.append("text")
+    .attr("class", "xlabel")
+    .attr("x", width / 2)
+    .attr("y", height - margin.bottom / 2)
+    .attr("text-anchor", "middle")
+    .text("Width (cm)")
+    .style("font-size", "20px")
+    .style("fill", "black");
+  
+  svg.append("text")
+    .attr("class", "ylabel")
+    .attr("x", -height / 2)
+    .attr("y", margin.left / 2)
+    .attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle")
+    .text("Length (cm)")
+    .style("font-size", "20px")
+    .style("fill", "black");
+    
+    
   // axis scales
   const xAxis = d3.axisBottom(xScale)
   svg.append("g")
@@ -49,26 +67,20 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .call(yAxis);
 
   // circles
-svg.append("g")
-    .selectAll("circle")
-    .data(data) // second argument is the unique key for that row
-    .join("circle")
-    .attr("cx", d => xScale(d.width))
-    .attr("cy", d => yScale(d.length))
-    .attr("r", radius)
-    .attr("fill", d => sizeScale(d.ArtistLifespan))
-    //.call(sel => sel.transition()
-      //.delay(500)
-      //.duration(1500)
-      //.attr("cx", d => xScale(d.width))
-      //.attr("cy", d => yScale(d.length)))
 
-   // svg.selectAll(".bar")
-   // .data(data)
-   // .join("rect")
-   // .attr("class", "bar")
-   // .attr("x", 0 + margin)
-   // .attr("y", d => yScale(d.Nationality))
-   // .attr("width", d => xScale(d.Count))
-   // .attr("height", yScale.bandwidth())
+
+  svg.selectAll('.circle')
+    .data(data) // second argument is the unique key for that row
+    .join(
+      enter => enter
+    .append("circle")
+    .attr("class", "circle")
+    .attr("r", radius) // In this element, I might have to assign AL
+    .attr("cx", d => xScale(d["Width (cm)"]))) //scale this based on the data
+    .attr("cy", d => yScale(d["Length (cm)"])) //scale this based on the data
+    .attr("circle", d => sizeScale(d["Artist Lifespan"]))
+    .attr("fill", "purple")
+
+
+    
 });
