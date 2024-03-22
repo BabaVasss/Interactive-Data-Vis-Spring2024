@@ -51,7 +51,7 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
     .attr("transform", "rotate(-90)")
     .attr("text-anchor", "middle")
     .text("Length (cm)")
-    .style("font-size", "20px")
+    .style("font-size", "30px")
     .style("fill", "purple");
     
     
