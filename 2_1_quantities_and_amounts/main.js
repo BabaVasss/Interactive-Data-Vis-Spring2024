@@ -22,29 +22,17 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
     //const xScale = d3.scaleBand()
     const xScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.Count)])
-     
       .range([margin, width - margin]) //<- #vertical Bars
     
 
-
-
-
     //add yscale for the bargraph // the error is in the yScale
     const yScale = d3.scaleBand()
-      
       .domain(data.map(d => d.Nationality))
-     
       .range([height - margin, margin]) 
-      
       .padding(0.1)
       
       
-      
-
-
-
-
-
+    
     //add category or group to X axis; this places the magin in a location
     const xAxis = d3.axisBottom(xScale)
     svg.append("g")
@@ -69,5 +57,6 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
       .attr("y", d => yScale(d.Nationality))
       .attr("width", d => xScale(d.Count))
       .attr("height", yScale.bandwidth())
+
       
   });
