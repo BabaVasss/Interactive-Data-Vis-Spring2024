@@ -1,7 +1,7 @@
 /* CONSTANTS AND GLOBALS */
 const width = window.innerWidth * 0.9,
   height = window.innerHeight * 0.7;
-  // margin = { top: 20, bottom: 50, left: 60, right: 40 };
+ // margin = { top: 20, bottom: 50, left: 60, right: 40 };
 
 /**
  * LOAD DATA
@@ -10,9 +10,9 @@ const width = window.innerWidth * 0.9,
 Promise.all([
   d3.json("../data/world.json"),
   d3.csv("../data/MoMA_nationalities.csv", d3.autoType),
-]).then(([geojson, capitals]) => {
+]).then(([geojson, Nationality]) => {
   console.log(geojson)
-  console.log(capitals)
+  console.log(Nationality)
 
   const svg = d3
     .select("#container")
@@ -21,38 +21,34 @@ Promise.all([
     .attr("height", height);
   
   // SPECIFY PROJECTION
-  const projection = d3.geoAlbersUsa()
-    .fitSize(
-      [width, height],
-      geojson
-    );
+  const projection = d3.geoMercator()
+    .fitSize([width, 
+      height], 
+      geojson);
 
   // DEFINE PATH FUNCTION
   const geoPathGen = d3.geoPath(projection)
 
-  // APPEND GEOJSON PATH  
-  svg.selectAll(".us-state")
-    .data(geojson.features)
-    .join("path")
-    .attr("class", "us-state")
-    .attr("stroke", "black")
-    .attr("fill", "transparent")
-    .attr("d", d => {
-      return geoPathGen(d)
-    })
-  
-  // APPEND DATA AS SHAPE
-  svg.selectAll(".us-capital")
-    .data(capitals)
-    .join("circle")
-    .attr("class", "us-capital")
-    .attr("r", 3)
-    // .attr("cx", 20)
-    // .attr("cy", 20)
-    .attr("transform", d => {
-      const point = projection([d.longitude, d.latitude])
-      return `translate(${point[0]},${point[1]})` 
-    })
+
+//ColorScale
+const colorScale = d3.scaleLog() //https://www.d3indepth.com/scales/   //according research 'Log interpolates using a log function y=m*log(x)+b and can be useful when the data has an exponential nature to it.'
+.domain([1, 
+  d3.max(Nationality,           // Artist Nationality by Count
+    d => d.Count)])
+.range(["transparent", "purple"])  //Assigning color palette
 
 
-});
+   // APPEND GEOJSON PATH  
+ svg.selectAll(".world")
+   .data(geojson.features)
+   .join("path")
+   .attr("class", "country") 
+   .attr("stroke", "orange")
+   .attr("fill", d => {
+    const country = d.properties.name; const nationality = Nationality.find(entry => entry.Country === country);
+    return nationality ? colorScale(nationality.Count) : "transparent";})
+.attr("d", d => geoPathGen(d));
+   
+
+})
+
