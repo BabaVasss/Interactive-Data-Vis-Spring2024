@@ -58,7 +58,7 @@ svg.append("path")
   .attr("d", line(data));
   
 
-//Append Area
+//Append Area //some type of adjusting of the area, to fill the space between the line and the xAxis would need to occur here:
 svg.append("path")
    .attr("fill", "purple")
    .attr("d", area(data))
