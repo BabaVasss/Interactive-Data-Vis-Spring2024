@@ -2,7 +2,7 @@
 const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 60, left: 60, right: 40 },
-  radius = 2;
+  radius = 1;
 
 /* LOAD DATA */
 d3.csv("../data/MoMA_distributions.csv", d3.autoType)
@@ -75,10 +75,11 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
       enter => enter
     .append("circle")
     .attr("class", "circle")
-    .attr("r", radius) // In this element, I might have to assign AL
+    //.attr("r", radius) // In this element, I might have to assign AL
     .attr("cx", d => xScale(d["Width (cm)"]))) //scale this based on the data
     .attr("cy", d => yScale(d["Length (cm)"])) //scale this based on the data
-    .attr("circle", d => sizeScale(d["Artist Lifespan"]))
+    .attr("r", d => sizeScale(d["Artist Lifespan"])) //scale raduis of points by "artist Lifespan"
+    .attr("opacity", 0.2)
     .attr("fill", "purple")
 
 
