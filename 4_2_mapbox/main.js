@@ -1,6 +1,6 @@
 //constants and globals for all graphs
-const width = window.innerWidth * 0.9,
-  height = window.innerHeight * 0.7;
+//const width = window.innerWidth * 0.9,
+  //height = window.innerHeight * 0.7;
 
 //Map Building
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWtlZW1zaGVwaGVyZCIsImEiOiJjbHZianY3am4wOXZpMmpsNDR0enNwbWtyIn0.W-Bc7R2RIh11qf5f0EbA8A';

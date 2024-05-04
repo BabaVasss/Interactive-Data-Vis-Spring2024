@@ -3,11 +3,10 @@ const width = window.innerWidth *.8 ;
 const height = 400;
 const margin = 20;
 
-d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
+d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
     console.log("data",data)
 
-
-    /* SCALES */
+  /* SCALES */
    
     //first add svg to container
     const svg = d3
@@ -26,9 +25,9 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
 
     //add yscale for the bargraph // the error is in the yScale
     const yScale = d3.scaleBand()
-      .domain(data.map(d => d.Nationality))
+      .domain(data.map(d => d.Gender))
       .range([height - margin, margin]) 
-      .padding(0.1)
+      .padding(0.2)
       
       
     
@@ -53,9 +52,13 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType).then(data => {
       .join("rect")
       .attr("class", "bar")
       .attr("x", 0 + margin)
-      .attr("y", d => yScale(d.Nationality))
+      .attr("y", d => yScale(d.Gender))
       .attr("width", d => xScale(d.Count))
       .attr("height", yScale.bandwidth())
+      .style("fill", "purple")
 
       
   });
+  
+
+      
