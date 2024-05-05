@@ -55,7 +55,11 @@ d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
       .attr("y", d => yScale(d.Gender))
       .attr("width", d => xScale(d.Count))
       .attr("height", yScale.bandwidth())
-      .style("fill", "purple")
+      .style("fill", (d, i) => {
+        if(d.Gender === 'Male') return "blue"
+        else if (d.Gender === 'Female') return "purple"
+     })
+    
 
       
   });
