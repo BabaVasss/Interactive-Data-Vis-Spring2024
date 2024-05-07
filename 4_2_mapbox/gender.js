@@ -14,7 +14,8 @@ d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .style("overflow", "visible");
+      .style("overflow", "visible")
+     
 
     //add xscale for the bargraph
     //const xScale = d3.scaleBand()
@@ -53,16 +54,20 @@ d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
       .attr("class", "bar")
       .attr("x", 0 + margin)
       .attr("y", d => yScale(d.Gender))
-      .attr("width", d => xScale(d.Count))
+      .attr("width", d => xScale(d.Count) - xScale(0))
       .attr("height", yScale.bandwidth())
-      .style("fill", (d, i) => {
+      .style("fill", (d) => {
         if(d.Gender === 'Male') return "blue"
         else if (d.Gender === 'Female') return "purple"
      })
-    
 
       
+        
+   
+     
+      
   });
-  
+  ///width: 960px;
+	//margin-right:auto; margin-left:auto; margin-top: 5px; margin-bottom: 10px;
 
       
