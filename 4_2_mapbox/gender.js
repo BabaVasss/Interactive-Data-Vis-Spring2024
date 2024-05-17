@@ -16,6 +16,7 @@ d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
       .attr("height", height)
       .style("overflow", "visible")
      
+     
 
     //add xscale for the bargraph
     //const xScale = d3.scaleBand()
@@ -62,7 +63,8 @@ d3.csv('../data/MoMa_Gender.csv', d3.autoType).then(data => {
      })
 
       
-        
+
+  
    
      
       
