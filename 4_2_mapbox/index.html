@@ -7,23 +7,92 @@
   </head>
   <body>
     <center>
-      <h3>What to expect at MoMa</h3>
+      <h3>What to expect at MoMA</h3>
     </center>
+    <center>
     <h4> Introduction | Abstract | Purpose</h4>
+    <p>
+      The purpose of this website is to help tourists in NYC locate the MoMA and understand the types of art metrics they might witness while attending. In the map below, the trainstations throughout the boroughs are highlighted red because NYC trains are the most "reliable" source of transportation.
+    </p>
+    </center>
+<br>
+    <p>
+      Notice that the map has indicators for other tourists attractions that are close to MoMA; there are some listed in the table below.
+    </p>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th colspan="5">Tourist Attractions Near MoMA</th>
+    </tr>
+    <tr>
+      <th>Tourist Attraction</th>
+      <th>Year Built</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>Rockefeller Center</td>
+    <td>1930-1939</td>
+    <td>45 Rockefeller Plaza, New York, NY 10111</td>
+  </tr>
+  <tr>
+    <td>Time Square</td>
+    <td>1904</td>
+    <td> Manhattan, NY 10036</td>
+  </tr>
+  <tr>
+    <td>Saint Patrick Cathedral</td>
+    <td>1879</td>
+    <td> 5th Ave, New York, NY 10022</td>
+  </tr>
+</table>
+<br>
     <div id='map' style='width: 100%; height: 800px;'></div>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
     <script src="../lib/d3.js"></script>
     <script src="main.js"></script>
-
+<br>
+<table>
+  <thead>
+    <tr>
+      <th colspan="5">A Few Trainstations close to MoMA</th>
+    </tr>
+    <tr>
+      <th>Trainstation</th>
+      <th>Accessible Trains</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>7th Avenue</td>
+    <td>D E B(weekends)</td>
+  </tr>
+  <tr>
+    <td>50th Street</td>
+    <td>B  D  F</td>
+  </tr>
+  <tr>
+    <td>49th Street</td>
+    <td>N R W(on weekends)</td>
+  </tr>
+</table>
+<br>
     <center>
       <h5> Male and Female Artists</h5>
+ <br>
+      <p>The graph below represents artist contribution by gender at the MoMA</p>
       <div id="container"></div>
+ <br>
+      <p>The "male and female" dataset was created by isolating the gender category from the MoMA distributions dataset into a discrete dataframe.In this new dataframe I cleaned the data by removing cells that were not indicators of either male or female and aggreated the remaining cells that were indicators by count to represent total male and total female art work contribution represented by MoMA distributions</p>
     </center> 
     <script src="../lib/d3.js"></script>
     <script src="gender.js"></script>
-    <button onclick="">triggerTransition</button>
-
+<br>
+<h6>MoMA Attendance</h6>
+<p> For the year 2022-23 MoMA welcomed through its doors, 2.7 million visitors. <a href="https://www.moma.org/about/annualreportFY23#:~:text=This%20year%20we%20welcomed%20nearly,with%20film%20series%20and%20performances.">MoMA Integrity</a>
+</p>
     
+   
   </body>
 </html>

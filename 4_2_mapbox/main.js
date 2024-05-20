@@ -13,7 +13,7 @@ const usMap = new mapboxgl.Map({
 })
 
 //Popup - MoMa
-const MoMaPopUp = new mapboxgl.Popup().setText("Museum of Modern Art [MoMa]") //append MoMa popup
+const MoMaPopUp = new mapboxgl.Popup().setText("Museum of Modern Art [MoMa]: 11 W 53rd St, New York, NY 10019") //append MoMa popup
 
 const MoMa = new mapboxgl.Marker()
     .setLngLat([-73.98066323065026, 40.76101009762772])
